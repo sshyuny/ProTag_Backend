@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: protag
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:tempDB
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        '[format_sql]': TRUE
