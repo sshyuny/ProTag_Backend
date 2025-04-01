@@ -1,13 +1,11 @@
-package com.sshyu.protag.adapter.out.persistence;
+package com.sshyu.protag.adapter.out.persistence.project.mysql;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Entity
-@AllArgsConstructor
 @Getter
 public class ProjectEntity {
     
@@ -17,5 +15,13 @@ public class ProjectEntity {
     private String title;
 
     protected ProjectEntity() {}
+
+    private ProjectEntity(String title) {
+        this.title = title;
+    }
+
+    public static ProjectEntity create(String title) {
+        return new ProjectEntity(title);
+    }
 
 }

@@ -2,8 +2,8 @@ package com.sshyu.protag.application.service;
 
 import org.springframework.stereotype.Service;
 
-import com.sshyu.protag.application.port.in.project.ProjectUseCase;
-import com.sshyu.protag.application.port.out.project.ProjectPort;
+import com.sshyu.protag.domain.project.port.in.project.ProjectUseCase;
+import com.sshyu.protag.domain.project.port.out.project.ProjectRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -11,10 +11,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProjectService implements ProjectUseCase {
 
-    public final ProjectPort projectPort;
+    private final ProjectRepository projectRepository;
     
     @Override
-    public Integer saveProject() {
-        return projectPort.saveProject();
+    public void saveProject(String title) {
+        projectRepository.saveProject(title);
     }
 }
