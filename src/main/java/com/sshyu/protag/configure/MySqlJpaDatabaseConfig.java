@@ -25,28 +25,28 @@ import jakarta.persistence.EntityManagerFactory;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-    basePackages = "com.sshyu.protag.adapter.out.persistence.project.mysql",
+    basePackages = "com.sshyu.protag.adapter.out.persistence.mysql.*.jpa",
     entityManagerFactoryRef = "mySqlJpaEntityManagerFactory",
     transactionManagerRef = "mySqlJpaTransactionManager"
 )
 public class MySqlJpaDatabaseConfig {
     
     @Primary
-    @Bean(name = "mySqlJpaDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.mysql-jpa")
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource.mysql")
     public DataSource mySqlJpaDataSource() {
         return DataSourceBuilder.create().type(HikariDataSource.class).build();
     }
 
     @Primary
-    @Bean(name = "mySqlJpaEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean primaryEntityManagerFactory(
+    @Bean
+    public LocalContainerEntityManagerFactoryBean mySqlJpaEntityManagerFactory(
             EntityManagerFactoryBuilder builder,
             @Qualifier("mySqlJpaDataSource") DataSource dataSource) {
 
         LocalContainerEntityManagerFactoryBean factoryBean = builder
                 .dataSource(dataSource)
-                .packages("com.sshyu.protag.adapter.out.persistence.project.mysql")  // 엔티티가 위치한 패키지 경로
+                .packages("com.sshyu.protag.adapter.out.persistence.mysql.*.jpa")  // 엔티티가 위치한 패키지 경로
                 .persistenceUnit("jpa")
                 .build();
 
@@ -62,7 +62,7 @@ public class MySqlJpaDatabaseConfig {
     }
 
     @Primary
-    @Bean(name = "mySqlJpaTransactionManager")
+    @Bean
     public PlatformTransactionManager mySqlJpaTransactionManager(
             @Qualifier("mySqlJpaEntityManagerFactory") EntityManagerFactory emf) {
         return new JpaTransactionManager(emf);

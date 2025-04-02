@@ -1,4 +1,4 @@
-package com.sshyu.protag.adapter.out.persistence.project.mysql;
+package com.sshyu.protag.adapter.out.persistence.mysql.project.jpa;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
