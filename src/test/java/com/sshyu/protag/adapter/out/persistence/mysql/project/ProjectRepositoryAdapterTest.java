@@ -14,7 +14,7 @@ import com.sshyu.protag.domain.project.model.Project;
 public class ProjectRepositoryAdapterTest {
     
     @Autowired
-    ProjectRepositoryAdapter repositoryAdapter;
+    ProjectRepositoryRoutingAdapter repositoryAdapter;
     
     @Test
     void Project_저장_조회() {

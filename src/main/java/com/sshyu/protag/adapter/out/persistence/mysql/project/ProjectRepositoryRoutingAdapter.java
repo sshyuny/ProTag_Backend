@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sshyu.protag.adapter.out.persistence.mysql.project.jpa.ProjectRepositoryWithJpa;
-import com.sshyu.protag.adapter.out.persistence.mysql.project.mybatis.ProjectRepositoryWithMyBatis;
+import com.sshyu.protag.adapter.out.persistence.mysql.project.jpa.ProjectJpaRepositoryImpl;
+import com.sshyu.protag.adapter.out.persistence.mysql.project.mybatis.ProjectMyBatisRepositoryImpl;
 import com.sshyu.protag.adapter.out.persistence.mysql.project.mybatis.ProjectResult;
 import com.sshyu.protag.domain.project.model.Project;
 import com.sshyu.protag.domain.project.port.out.project.ProjectRepository;
@@ -20,10 +20,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Component
 @Transactional
-public class ProjectRepositoryAdapter implements ProjectRepository {
+public class ProjectRepositoryRoutingAdapter implements ProjectRepository {
 
-    private final ProjectRepositoryWithJpa projectRepositoryWithJpa;
-    private final ProjectRepositoryWithMyBatis projectRepositoryWithMyBatis;
+    private final ProjectJpaRepositoryImpl projectRepositoryWithJpa;
+    private final ProjectMyBatisRepositoryImpl projectRepositoryWithMyBatis;
     
     @Override
     public void saveProject(String title) {

@@ -8,7 +8,7 @@ import jakarta.persistence.PersistenceContext;
 
 @Repository
 @Transactional
-public class ProjectRepositoryWithJpa {
+public class ProjectJpaRepositoryImpl {
 
     @PersistenceContext
     private EntityManager em;
