@@ -20,7 +20,7 @@ mysql -u pjadminuser -p
 DROP TABLE IF EXISTS MEMBER;
 CREATE TABLE MEMBER (
     member_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    member_name VARCHAR(50),
+    member_name VARCHAR(50) COMMENT '사용자 이름',
     created_at DATETIME NOT NULL COMMENT '데이터 생성 시각',
     updated_at DATETIME NOT NULL COMMENT '데이터 수정 시각',
     is_deleted TINYINT(1) NOT NULL DEFAULT 0 COMMENT '삭제 여부(0: 존재, 1: 삭제)'
