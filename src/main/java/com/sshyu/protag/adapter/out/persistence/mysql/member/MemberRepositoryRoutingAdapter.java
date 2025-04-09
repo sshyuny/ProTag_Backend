@@ -1,0 +1,44 @@
+package com.sshyu.protag.adapter.out.persistence.mysql.member;
+
+import java.time.LocalDateTime;
+
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.sshyu.protag.adapter.out.persistence.mysql.member.jpa.MemberDataJpaRepository;
+import com.sshyu.protag.adapter.out.persistence.mysql.member.jpa.MemberEntity;
+import com.sshyu.protag.adapter.out.persistence.mysql.member.jpa.MemberJpaRepositoryImpl;
+import com.sshyu.protag.domain.member.model.Member;
+import com.sshyu.protag.domain.member.port.out.MemberRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Component
+@Transactional
+public class MemberRepositoryRoutingAdapter implements MemberRepository {
+    
+    final MemberJpaRepositoryImpl memberJpaRepositoryImpl;
+    final MemberDataJpaRepository memberDataJpaRepository;
+
+    @Override
+    public void save(Member member) {
+        LocalDateTime now = LocalDateTime.now();
+        MemberEntity memberEntity = MemberEntity.builder()
+            .memberName(member.getMemberName())
+            .loginId(member.getLoginId())
+            .password(member.getPassword())
+            .createdAt(now)
+            .updatedAt(now)
+            .isDeleted(0)
+            .build();
+        memberJpaRepositoryImpl.save(memberEntity);
+    }
+
+    @Override
+    public boolean isLoginIdInUse(String loginId) {
+        return memberDataJpaRepository.existsByLoginId(loginId);
+    }
+
+
+}

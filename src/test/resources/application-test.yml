@@ -1,6 +1,12 @@
 spring:
   application:
     name: protag
+  jpa:
+    show-sql: false
+    generate-ddl: true
+    properties:
+      hibernate:
+        format_sql: true
   datasource:
     mysql:
       jdbc-url: jdbc:h2:mem:testdb1;MODE=MySQL
