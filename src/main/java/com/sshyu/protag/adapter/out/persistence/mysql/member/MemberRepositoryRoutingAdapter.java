@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sshyu.protag.adapter.out.persistence.mysql.member.jpa.MemberDataJpaRepository;
 import com.sshyu.protag.adapter.out.persistence.mysql.member.jpa.MemberEntity;
 import com.sshyu.protag.adapter.out.persistence.mysql.member.jpa.MemberJpaRepositoryImpl;
+import com.sshyu.protag.domain.member.exception.DuplicateLoginIdException;
 import com.sshyu.protag.domain.member.model.Member;
 import com.sshyu.protag.domain.member.port.out.MemberRepository;
 
@@ -36,8 +37,9 @@ public class MemberRepositoryRoutingAdapter implements MemberRepository {
     }
 
     @Override
-    public boolean isLoginIdInUse(String loginId) {
-        return memberDataJpaRepository.existsByLoginId(loginId);
+    public void validateLoginId(String loginId) {
+        boolean isLoginIdInUse = memberDataJpaRepository.existsByLoginId(loginId);
+        if (isLoginIdInUse) { throw new DuplicateLoginIdException("이미 존재하는 아이디입니다."); }
     }
 
 

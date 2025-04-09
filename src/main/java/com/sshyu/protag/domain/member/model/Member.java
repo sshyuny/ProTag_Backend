@@ -1,5 +1,7 @@
 package com.sshyu.protag.domain.member.model;
 
+import com.sshyu.protag.domain.member.exception.InvalidPasswordException;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -15,9 +17,9 @@ public class Member {
         return password.equals(reqPassword);
     }
 
-    public boolean isPasswordValid() {
+    public void validatePassword() {
         int passwordLength = password.length();
-        if (passwordLength < 8 || passwordLength > 40) return false;
+        if (passwordLength < 8 || passwordLength > 40) { throw new InvalidPasswordException("비밀번호 길이가 부적합합니다."); }
 
         boolean hasAlphabet = false;
         boolean hasDigit = false;
@@ -29,10 +31,11 @@ public class Member {
                 hasDigit = true;
             }
             if (hasAlphabet && hasDigit) {
-                return true;
+                return;
             }
         }
-        return false;
+
+        throw new InvalidPasswordException("비밀번호에는 알파벳과 숫자가 모두 들어가야합니다.");
     }
 
 }

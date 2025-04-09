@@ -6,6 +6,6 @@ public interface MemberRepository {
     
     void save(Member member);
 
-    boolean isLoginIdInUse(String loginId);
+    void validateLoginId(String loginId);
 
 }
