@@ -8,4 +8,6 @@ public interface MemberRepository {
 
     void validateLoginId(String loginId);
 
+    Member getValidMemberForLogin(String loginId);
+
 }

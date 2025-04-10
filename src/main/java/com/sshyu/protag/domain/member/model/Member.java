@@ -1,5 +1,6 @@
 package com.sshyu.protag.domain.member.model;
 
+import com.sshyu.protag.domain.member.exception.InvalidLoginException;
 import com.sshyu.protag.domain.member.exception.InvalidPasswordException;
 
 import lombok.Builder;
@@ -12,9 +13,11 @@ public class Member {
     private String memberName;
     private String loginId;
     private String password;
+    private int isDeleted;
 
-    public boolean authenticate(String reqPassword) {
-        return password.equals(reqPassword);
+    public void authenticate(String reqPassword) {
+        if (!password.equals(reqPassword)) { throw new InvalidLoginException("잘못된 비밀번호"); }
+        if (isDeleted == 1) { throw new InvalidLoginException("삭제된 계정"); }
     }
 
     public void validatePassword() {
