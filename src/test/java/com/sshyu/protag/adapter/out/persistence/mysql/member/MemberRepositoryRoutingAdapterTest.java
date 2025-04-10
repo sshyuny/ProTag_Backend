@@ -1,4 +1,4 @@
-package com.sshyu.protag.adapter.out.persistence.mysql.project;
+package com.sshyu.protag.adapter.out.persistence.mysql.member;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import com.sshyu.protag.adapter.out.persistence.mysql.member.MemberRepositoryRoutingAdapter;
 import com.sshyu.protag.domain.member.exception.DuplicateLoginIdException;
 import com.sshyu.protag.domain.member.model.Member;
 

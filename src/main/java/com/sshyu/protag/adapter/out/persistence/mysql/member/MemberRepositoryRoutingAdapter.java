@@ -49,7 +49,7 @@ public class MemberRepositoryRoutingAdapter implements MemberRepository {
         List<MemberEntity> memberEntities = memberDataJpaRepository.findByLoginId(loginId);
 
         int memberEntitiesSize = memberEntities.size();
-        if (memberEntitiesSize < 1) { throw new InvalidLoginException("존재하지 않는 loginId"); }
+        if (memberEntitiesSize < 1) { throw new InvalidLoginException("존재하지 않는 loginId: " + loginId); }
         if (memberEntitiesSize > 1) { throw new InvalidLoginException("여러 loginId 존재: " + loginId); }
 
         MemberEntity memberEntity = memberEntities.get(0);
