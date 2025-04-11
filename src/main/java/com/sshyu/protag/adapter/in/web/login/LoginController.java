@@ -32,6 +32,7 @@ public class LoginController {
 
     @PostMapping("/api/logout")
     public String logout() {
+        loginUseCase.logout();
         return "success";
     }
 

@@ -23,4 +23,11 @@ public class MemberService implements MemberUseCase {
         memberRepository.save(member);
     }
 
+    @Override
+    public void withdraw(Member reqMember) {
+        Member seletedMember = memberRepository.getValidAndUniqueMember(reqMember.getLoginId());
+        seletedMember.authenticate(reqMember.getPassword());
+        memberRepository.markAsDeleted(seletedMember.getMemberId());
+    }
+
 }

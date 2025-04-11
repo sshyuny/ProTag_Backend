@@ -6,5 +6,7 @@ import com.sshyu.protag.domain.member.model.Member;
 public interface SessionManager {
 
     SessionToken createSessionFor(Member member);
+
+    void destroySession();
     
 }

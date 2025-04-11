@@ -8,6 +8,8 @@ public interface MemberRepository {
 
     void validateLoginId(String loginId);
 
-    Member getValidMemberForLogin(String loginId);
+    Member getValidAndUniqueMember(String loginId);
+
+    void markAsDeleted(Long memberId);
 
 }

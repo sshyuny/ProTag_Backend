@@ -24,4 +24,12 @@ public class HttpSessionManager implements SessionManager {
 
         return SessionToken.builder().token(SessionConst.LOGIN_MEMBER).build();
     }
+
+    @Override
+    public void destroySession() {
+        HttpSession httpSession = httpSessionProvider.getObject();
+        httpSession.invalidate();
+    }
+
+    
 }

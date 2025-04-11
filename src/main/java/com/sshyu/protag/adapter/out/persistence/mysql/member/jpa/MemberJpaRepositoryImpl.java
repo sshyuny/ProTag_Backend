@@ -16,4 +16,10 @@ public class MemberJpaRepositoryImpl {
     public void save(MemberEntity memberEntity) {
         em.persist(memberEntity);
     }
+
+    public void updateForWithdrawal(Long membeId) {
+        MemberEntity memberEntity = em.find(MemberEntity.class, membeId);
+        memberEntity.changeForWithdrawal();
+    }
+
 }

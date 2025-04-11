@@ -10,6 +10,7 @@ import lombok.Getter;
 @Getter
 public class Member {
     
+    private Long memberId;
     private String memberName;
     private String loginId;
     private String password;

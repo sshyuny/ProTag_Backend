@@ -7,4 +7,6 @@ public interface LoginUseCase {
     
     SessionToken login(Member member);
 
+    void logout();
+
 }

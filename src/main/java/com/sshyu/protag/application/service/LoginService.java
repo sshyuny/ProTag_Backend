@@ -19,8 +19,14 @@ public class LoginService implements LoginUseCase {
 
     @Override
     public SessionToken login(Member member) {
-        Member findedMember = memberRepository.getValidMemberForLogin(member.getLoginId());
+        Member findedMember = memberRepository.getValidAndUniqueMember(member.getLoginId());
         findedMember.authenticate(member.getPassword());
         return sessionManager.createSessionFor(findedMember);
     }
+
+    @Override
+    public void logout() {
+        sessionManager.destroySession();
+    }
+    
 }

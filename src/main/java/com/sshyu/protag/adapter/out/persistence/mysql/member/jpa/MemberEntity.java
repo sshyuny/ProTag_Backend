@@ -32,4 +32,9 @@ public class MemberEntity {
     private LocalDateTime updatedAt;
     private Integer isDeleted;
 
+    public void changeForWithdrawal() {
+        this.isDeleted = 1;
+        this.updatedAt = LocalDateTime.now();
+    }
+
 }

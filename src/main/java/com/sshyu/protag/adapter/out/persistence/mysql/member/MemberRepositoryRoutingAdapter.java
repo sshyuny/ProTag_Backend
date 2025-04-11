@@ -45,7 +45,7 @@ public class MemberRepositoryRoutingAdapter implements MemberRepository {
     }
 
     @Override
-    public Member getValidMemberForLogin(String loginId) {
+    public Member getValidAndUniqueMember(String loginId) {
         List<MemberEntity> memberEntities = memberDataJpaRepository.findByLoginId(loginId);
 
         int memberEntitiesSize = memberEntities.size();
@@ -55,6 +55,7 @@ public class MemberRepositoryRoutingAdapter implements MemberRepository {
         MemberEntity memberEntity = memberEntities.get(0);
 
         return Member.builder()
+                    .memberId(memberEntity.getMemberId())
                     .loginId(memberEntity.getLoginId())
                     .password(memberEntity.getPassword())
                     .memberName(memberEntity.getMemberName())
@@ -62,5 +63,9 @@ public class MemberRepositoryRoutingAdapter implements MemberRepository {
                     .build();
     }
 
+    @Override
+    public void markAsDeleted(Long memberId) {
+        memberJpaRepositoryImpl.updateForWithdrawal(memberId);
+    }
 
 }
