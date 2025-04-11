@@ -1,22 +1,23 @@
-package com.sshyu.protag.adapter.in.web.member;
+package com.sshyu.protag.adapter.in.web.login;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sshyu.protag.adapter.in.web.member.MemberReqDto;
+import com.sshyu.protag.domain.auth.port.in.LoginUseCase;
 import com.sshyu.protag.domain.member.model.Member;
-import com.sshyu.protag.domain.member.port.in.MemberUseCase;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-public class MemberController {
+public class LoginController {
     
-    private final MemberUseCase memberUseCase;
-    
-    @PostMapping("/api/withoutlogin/member")
-    public String createMember(@RequestBody MemberReqDto memberReqDto) {
+    private final LoginUseCase loginUseCase;
+
+    @PostMapping("/api/login")
+    public String login(@RequestBody MemberReqDto memberReqDto) {
 
         Member member = Member.builder()
             .memberName(memberReqDto.getMemberName())
@@ -24,10 +25,14 @@ public class MemberController {
             .password(memberReqDto.getPassword())
             .build();
 
-        memberUseCase.register(member);
+        loginUseCase.login(member);
 
         return "success";
     }
 
+    @PostMapping("/api/logout")
+    public String logout() {
+        return "success";
+    }
 
 }

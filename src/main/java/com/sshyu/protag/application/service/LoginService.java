@@ -21,6 +21,6 @@ public class LoginService implements LoginUseCase {
     public SessionToken login(Member member) {
         Member findedMember = memberRepository.getValidMemberForLogin(member.getLoginId());
         findedMember.authenticate(member.getPassword());
-        return sessionManager.createSessionFor(member);
+        return sessionManager.createSessionFor(findedMember);
     }
 }

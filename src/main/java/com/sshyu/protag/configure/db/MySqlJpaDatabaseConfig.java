@@ -1,4 +1,4 @@
-package com.sshyu.protag.configure;
+package com.sshyu.protag.configure.db;
 
 import java.util.HashMap;
 import java.util.Map;

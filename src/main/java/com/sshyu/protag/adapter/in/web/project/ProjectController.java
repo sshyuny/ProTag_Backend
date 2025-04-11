@@ -1,5 +1,6 @@
 package com.sshyu.protag.adapter.in.web.project;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,11 @@ public class ProjectController {
     @PostMapping
     public void createProject(@RequestBody String title) {
         projectUseCase.saveProject(title);
+    }
+
+    @GetMapping
+    public String get() {
+        return "success";
     }
 
 }

@@ -1,4 +1,4 @@
-package com.sshyu.protag.configure;
+package com.sshyu.protag.configure.db;
 
 import javax.sql.DataSource;
 

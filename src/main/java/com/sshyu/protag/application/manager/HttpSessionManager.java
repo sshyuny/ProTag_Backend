@@ -20,8 +20,8 @@ public class HttpSessionManager implements SessionManager {
     public SessionToken createSessionFor(Member member) {
 
         HttpSession httpSession = httpSessionProvider.getObject();
-        httpSession.setAttribute("LOGIN", member);
+        httpSession.setAttribute(SessionConst.LOGIN_MEMBER, member.getLoginId());
 
-        return SessionToken.builder().token("LOGIN").build();
+        return SessionToken.builder().token(SessionConst.LOGIN_MEMBER).build();
     }
 }
