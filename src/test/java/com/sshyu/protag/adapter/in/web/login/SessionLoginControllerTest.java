@@ -6,6 +6,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -38,10 +39,13 @@ public class SessionLoginControllerTest {
         session.setAttribute(SessionConst.LOGIN_MEMBER, "sshyu");
 
         // 접근
-        mockMvc.perform(get("/api/project")
+        MvcResult response = mockMvc.perform(get("/api/project")
                 .session(session))
             .andExpect(status().isOk())
             .andReturn();
+
+        String contentAsString = response.getResponse().getContentAsString();
+        System.out.println("응답 바디 = " + contentAsString);
     }
 
 }
